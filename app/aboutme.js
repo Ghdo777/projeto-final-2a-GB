@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, } from "react-native";
 
 export default function Page() {
   return (
@@ -10,7 +10,6 @@ export default function Page() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -19,13 +18,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0e0e4ff",
   },
   main: {
-    flex: 1,
+    flex: 0,
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
   },
   title: {
-    fontSize: 64,
+    fontSize: 50,
+    textAlign: "center" ,
     fontWeight: "bold",
   },
   subtitle: {
