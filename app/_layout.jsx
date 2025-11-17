@@ -14,7 +14,7 @@ export default function Layout() {
                 paddingBottom: 5,
             },
             tabBarActiveTintColor: "white",
-            tabBarInactiveTintColor: "green"
+            tabBarInactiveTintColor: "#666666"
         }}>
             <Tabs.Screen
              name="index" 
@@ -24,14 +24,14 @@ export default function Layout() {
              />
              <Tabs.Screen
              name="pageone" 
-             options={{ title: "Obrigatório", headerShown: false,
-                tabBarIcon: ({color}) => <FontAwesome name="tag" size={24} color={color} /> 
+             options={{ title: "Livre", headerShown: false,
+                tabBarIcon: ({color}) => <FontAwesome name="bookmark" size={24} color={color} /> 
             }}
              />
              <Tabs.Screen
              name="pagetwo" 
-             options={{ title: "Livre", headerShown: false,
-                tabBarIcon: ({color}) => <FontAwesome name="tags" size={24} color={color} /> 
+             options={{ title: "Obrigatório", headerShown: false,
+                tabBarIcon: ({color}) => <FontAwesome name="bookmark" size={24} color={color} /> 
             }}
             />
              <Tabs.Screen

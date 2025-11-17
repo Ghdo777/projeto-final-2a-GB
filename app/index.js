@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
+import musica from "../assets/musica.png"
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Início</Text>
-        <Text style={styles.subtitle}>Projeto de DDM</Text>
+        <Text style={styles.title}>Bem-vindo ao Mundo da Música</Text>
+        <Text style={styles.subtitle}>Pequena descrição do que o app oferece:</Text>
+        <Image source={musica} style={styles.musica} />
+        <Text style={styles.descricao}>
+        Aqui você pode explorar a música do clássico ao sertanejo 
+        raiz. Descubra os estilos musicais, conheça artistas importantes, 
+        confira curiosidades sobre a história da música. Tudo isso de forma simples,
+         visual e interativa, para você aprender mais sobre as musicas.
+        </Text>
       </View>
     </View>
   );
@@ -14,22 +22,35 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "",
     padding: 24,
     backgroundColor: "#e0e0e4ff",
+    paddingTop: 30, // distancia do topo
   },
   main: {
-    flex: 1,
+    flex: 0,
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
   },
   title: {
-    fontSize: 64,
+    fontSize: 45,
     fontWeight: "bold",
+    textAlign: "center",
   },
   subtitle: {
-    fontSize: 36,
+    fontSize: 25,
     color: "#38434D",
+    textAlign: "center",
+    marginBottom:25,
+  },
+  descricao: {
+    fontSize: 20,
+    
+  },
+  musica:{
+    height: 300,
+    width: 550,
+    marginBottom: 25,
   },
 });

@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Obrigatório</Text>
-        <Text style={styles.subtitle}>Colocar dados do conteudo obrigatorio</Text>
+        <Text style={styles.title}></Text>
+        <Text style={styles.subtitle}>conteudo livre em conjunto com o tema obrigatorio</Text>
       </View>
     </View>
   );

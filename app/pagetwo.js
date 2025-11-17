@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Livre</Text>
-        <Text style={styles.subtitle}>conteudo livre em conjunto com o tema obrigatorio</Text>
+        <Text style={styles.title}></Text>
+        <Text style={styles.subtitle}>Colocar dados do conteudo obrigatorio</Text>
       </View>
     </View>
   );
@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 36,
     color: "#38434D",
+    marginHorizontal:"",
   },
 });
