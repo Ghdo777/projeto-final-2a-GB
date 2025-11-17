@@ -1,15 +1,18 @@
 import { Image, StyleSheet, Text, View, } from "react-native";
+import foto from "../assets/euimg.png"
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
+        <Image source={foto} style={style.foto} />
         <Text style={styles.title}>Sobre Mim</Text>
         <Text style={styles.subtitle}>Meus dados avaliatorios</Text>
       </View>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
