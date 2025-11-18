@@ -34,23 +34,23 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
   },
   title: {
-    fontSize: 45,
+    fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 25,
+    fontSize: 15,
     color: "#38434D",
     textAlign: "center",
     marginBottom:25,
   },
   descricao: {
-    fontSize: 20,
+    fontSize: 15,
     
   },
   musica:{
-    height: 300,
-    width: 550,
+    height: 200,
+    width: 320,
     marginBottom: 25,
   },
 });
