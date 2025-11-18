@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "",
     padding: 24,
-    backgroundColor: "#e0e0e4ff",
+    backgroundColor: "#d3d3d3",
     paddingTop: 30, // distancia do topo
   },
   main: {
