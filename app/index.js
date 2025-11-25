@@ -11,7 +11,7 @@ export default function Page() {
       <View style={styles.main}>
         <Text style={styles.title}>Bem-vindo ao Mundo da Música</Text>
         <Text style={styles.subtitle}>Pequena descrição do que o app oferece:</Text>
-        <Image source={musica} style={[styles.musica, { height: height * 0.25, width: width * 0.9 }]} resizeMode="contain" />
+        <Image source={musica} style={[styles.musica, { height: height * 0.25, width: width * 0.55 }]} resizeMode="contain" />
         <Text style={styles.descricao}>
           Aqui você pode explorar a música do clássico ao sertanejo 
           raiz. Descubra os estilos musicais, conheça artistas importantes, 
