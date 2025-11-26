@@ -4,36 +4,61 @@ import classica from '../assets/classica.png';
 import sertanejo from '../assets/sertanejo.png';
 
 export default function Page() {
-  // Obtendo as dimensões da tela com useWindowDimensions
   const { width, height } = useWindowDimensions();
+
+  // Breakpoints
+  const isMobile = width < 600;
+  const isTablet = width >= 600 && width < 1000;
+
+  // Fontes responsivas
+  const titleSize = isMobile ? 26 : isTablet ? 32 : 36;
+  const textSize = isMobile ? 15 : isTablet ? 17 : 18;
+
+  // Imagens responsivas
+  const imageSize = isMobile
+    ? { width: width * 0.9, height: height * 0.28 }
+    : isTablet
+    ? { width: width * 0.7, height: height * 0.3 }
+    : { width: 600, height: 350 };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.main}>
-        <Text style={[styles.p1, { fontSize: width * 0.05 }]}>Música Clássica</Text>
-        <Image source={classica} style={[styles.classica, { width: width * 0.87, height: height * 0.25 }]} />
-        <Text style={[styles.pp1, { fontSize: width * 0.023 }]}>
-        A música clássica surgiu na Europa entre os séculos XVII e XIX e é considerada uma das formas mais sofisticadas de 
-        expressão musical já criadas. Ela é caracterizada por composições extensas, grande preocupação com harmonia, melodias 
-        complexas e o uso de instrumentos como violino, piano, violoncelo e toda uma orquestra completa.Entre os compositores
-         mais famosos estão Ludwig van Beethoven, Wolfgang Amadeus Mozart e Johann Sebastian Bach, que influenciaram profundamente
-          a música ocidental. Suas obras são marcadas por emoção, intensidade e perfeição técnica, servindo de base para diversos
-           estilos que surgiram ao longo do tempo.
+        
+        {/* MÚSICA CLÁSSICA */}
+        <Text style={[styles.p1, { fontSize: titleSize }]}>Música Clássica</Text>
+
+        <Image 
+          source={classica} 
+          style={[styles.image, imageSize]} 
+          resizeMode="contain" 
+        />
+
+        <Text style={[styles.text, { fontSize: textSize }]}>
+          A música clássica surgiu na Europa entre os séculos XVII e XIX e é considerada uma das formas mais sofisticadas de 
+          expressão musical já criadas. Ela é caracterizada por composições extensas, grande preocupação com harmonia, melodias 
+          complexas e o uso de instrumentos como violino, piano, violoncelo e toda uma orquestra completa. Entre os compositores
+          mais famosos estão Ludwig van Beethoven, Wolfgang Amadeus Mozart e Johann Sebastian Bach, que influenciaram profundamente
+          a música ocidental. Suas obras são marcadas por emoção, intensidade e perfeição técnica.
         </Text>
 
-        <Text style={[styles.p2, { fontSize: width * 0.05 }]}>Sertanejo Raiz</Text>
-        <Image source={sertanejo} style={[styles.sertanejo, { width: width * 0.87, height: height * 0.25 }]} />
-        <Text style={[styles.pp2, { fontSize: width * 0.023 }]}>
-        Em contraste, o Sertanejo Raiz – ou Música Caipira – nasceu no interior do Brasil, sendo a voz autêntica e popular dos
-         estados de São Paulo, Minas Gerais, Goiás e Paraná. Sua origem é comumente associada ao trabalho de Cornélio Pires na 
-         década de 1920, que registrou e popularizou as primeiras gravações dessa arte folclórica. Enquanto a música clássica se
-          apoia na orquestra, o Sertanejo Raiz tem sua essência na Viola Caipira, instrumento fundamental que dita a melodia e o
-           ritmo. As composições, conhecidas como Modas de Viola, são geralmente mais simples na estrutura, mas profundas na temática.
-            Elas narram a vida na roça, a saudade da terra natal, os costumes, a fé e os dramas do homem do campo.O estilo é inconfundível 
-            pelo uso das Terças Afinadíssimas, onde as duplas (como os lendários Tonico e Tinoco ou Tião Carreiro e Pardinho) cantam em
-             harmonias vocais muito próximas, conferindo um toque de melancolia e autenticidade. Essa música, transmitida por tradição 
-             oral, é um pilar da cultura brasileira, carregando emoção e contando histórias de uma forma única e verdadeira.
+        {/* SERTANEJO RAIZ */}
+        <Text style={[styles.p2, { fontSize: titleSize }]}>Sertanejo Raiz</Text>
+
+        <Image 
+          source={sertanejo} 
+          style={[styles.image, imageSize]}
+          resizeMode="contain"
+        />
+
+        <Text style={[styles.text, { fontSize: textSize }]}>
+          O Sertanejo Raiz – ou Música Caipira – nasceu no interior do Brasil e representa a cultura popular de estados como
+          São Paulo, Minas Gerais, Goiás e Paraná. Sua origem está ligada ao trabalho de Cornélio Pires, na década de 1920.
+          Diferente da música clássica, o Sertanejo Raiz tem como base a Viola Caipira e as Modas de Viola, que tratam da vida
+          simples, saudade, fé e tradições do campo. As harmonias vocais próximas, conhecidas como Terças Afinadíssimas, são
+          marcas registradas de duplas como Tonico & Tinoco e Tião Carreiro & Pardinho.
         </Text>
+
       </View>
     </ScrollView>
   );
@@ -43,41 +68,32 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
-    padding: 16,
+    padding: 20,
     backgroundColor: "#d3d3d3",
   },
   main: {
-    flex: 1,
-    justifyContent: "center",
-    width: '100%',
+    width: "100%",
     maxWidth: 960,
+    alignItems: "center",
   },
   p1: {
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 12,
     marginTop: 20,
-  },
-  pp1: {
     marginBottom: 12,
-    marginLeft: 16,
-  },
-  classica: {
-    resizeMode: 'contain',
-    marginBottom: 10,
   },
   p2: {
-    marginBottom: 12,
     fontWeight: "bold",
     textAlign: "center",
-  },
-  pp2: {
+    marginTop: 30,
     marginBottom: 12,
-    marginLeft: 16,
   },
-  sertanejo: {
-    resizeMode: 'contain',
-    marginLeft: 16,
-    marginBottom: 12,
+  text: {
+    textAlign: "center",
+    maxWidth: 800,   // para web ficar elegante
+    marginBottom: 25,
+  },
+  image: {
+    marginBottom: 15,
   },
 });

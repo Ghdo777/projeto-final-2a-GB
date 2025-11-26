@@ -23,6 +23,12 @@ export default function Layout() {
             }}
              />
              <Tabs.Screen
+             name="music" 
+             options={{ title: "Musicas", headerShown: false,
+                tabBarIcon: ({color}) => <FontAwesome name="music" size={24} color={color} /> 
+            }}
+            />
+             <Tabs.Screen
              name="pageone" 
              options={{ title: "Livre", headerShown: false,
                 tabBarIcon: ({color}) => <FontAwesome name="bookmark" size={24} color={color} /> 
@@ -34,12 +40,14 @@ export default function Layout() {
                 tabBarIcon: ({color}) => <FontAwesome name="bookmark" size={24} color={color} /> 
             }}
             />
+            
              <Tabs.Screen
              name="aboutme" 
              options={{ title: "Sobre Mim", headerShown: false,
                 tabBarIcon: ({color}) => <FontAwesome name="user" size={24} color={color} /> 
             }}
             />
+            
         </Tabs>
     );
 }
