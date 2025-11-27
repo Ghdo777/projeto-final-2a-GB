@@ -41,7 +41,7 @@ export default function Page() {
         <Text style={[styles.text, { fontSize: textSize }]}>
           Guilherme Soares
         </Text>
-
+        <Text style={[styles.text, { fontSize: textSize }]}>RM: 08282</Text>
         <Text style={[styles.text, { fontSize: textSize }]}>
           2° MTEC Info
         </Text>
@@ -50,7 +50,7 @@ export default function Page() {
           Olá! Eu sou o Guilherme, estudante do 2° Info e idealizador do
           projeto Mundo da Música para Mobile.
         </Text>
-
+        
       </View>
     </ScrollView>
   );
