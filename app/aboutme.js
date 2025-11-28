@@ -22,7 +22,7 @@ export default function Page() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.main}>
-
+        
         {/* TÍTULO */}
         <Text style={[styles.title, { fontSize: titleSize }]}>
           Sobre o Autor

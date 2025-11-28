@@ -1,167 +1,234 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Audio } from "expo-av";
-// Importa o componente Slider para barra de progresso/controlador
 import Slider from "@react-native-community/slider";
 
-// Lista de faixas com id, nome e arquivo de áudio
-const tracks = [
-  { id: 1, name: "Clássica", file: require("../assets/musicclassica.mp3") },
-  { id: 2, name: "Sertanejo", file: require("../assets/musicsertanejo.mp3") },
-  { id: 3, name: "Sertanejo raiz", file: require("../assets/musicsertanejoraiz.mp3") },
+// -----------------------------------------------------
+// LISTAS DE MÚSICAS – cada player recebe sua própria lista
+// -----------------------------------------------------
+const tracksPlayer1 = [
+  { id: 1, name: "Clássica", file: require("../assets/musicas/musicclassica.mp3") },
+  { id: 2, name: "Sertanejo", file: require("../assets/musicas/musicsertanejo.mp3") },
+  { id: 3, name: "Sertanejo raiz", file: require("../assets/musicas/musicsertanejoraiz.mp3") },
 ];
 
-// Componente principal do player de música
-export default function Player() {
-  // Estado para armazenar o objeto de áudio atualmente carregado
-  const [sound, setSound] = useState(null);
-  // Estado que armazena a posição atual da música (em milissegundos)
-  const [pos, setPos] = useState(0);
-  // Estado que armazena a duração total da música (em milissegundos)
-  const [dur, setDur] = useState(1);
-  // Estado para indicar se a música está tocando (true) ou pausada (false)
-  const [playing, setPlaying] = useState(false);
-  // Estado que guarda o id da música atualmente selecionada
-  const [track, setTrack] = useState(1);
+const tracksPlayer2 = [
+  { id: 1, name: "Big G", file: require("../assets/musicas/FESTA DO BIG G.mp3") },
+  { id: 2, name: "te dar flores", file: require("../assets/musicas/Posso Até Não Te Da Flores.mp3") },
+  { id: 3, name: "Me apaixonei", file: require("../assets/musicas/EU ME APAIXONEI.mp3") },
+];
 
-  // Função que converte milissegundos em formato mm:ss para exibição
+const tracksPlayer3 = [
+  { id: 1, name: "Tubarões", file: require("../assets/musicas/Tubarões.mp3") },
+  { id: 2, name: "Cair Água", file: require("../assets/musicas/Vai Cair Água.mp3") },
+  { id: 3, name: "maloqueiro", file: require("../assets/musicas/Ama um Maloqueiro.mp3") },
+];
+
+
+// -----------------------------------------------------
+// COMPONENTE PLAYER — ele é reutilizável para cada bloco
+// -----------------------------------------------------
+function PlayerBlock({ tracks, playerSubTitle }) {
+
+  // Estados principais do player
+  const [sound, setSound] = useState(null);  // controla o áudio atual
+  const [pos, setPos] = useState(0);         // posição atual da música
+  const [dur, setDur] = useState(1);         // duração total
+  const [playing, setPlaying] = useState(false);  // se está tocando ou não
+  const [track, setTrack] = useState(1);     // música selecionada
+
+  // Formata milissegundos para 00:00
   const fmt = ms => {
-    const m = String(Math.floor(ms / 60000)).padStart(2, "0"); // minutos
-    const s = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0"); // segundos
+    const m = String(Math.floor(ms / 60000)).padStart(2, "0");
+    const s = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0");
     return `${m}:${s}`;
   };
 
-  // Função assíncrona para carregar a faixa selecionada
+  // -----------------------------------------------------
+  // Função responsável por carregar a música selecionada
+  // -----------------------------------------------------
   async function load() {
-    if (sound) await sound.unloadAsync(); // Se já tem som carregado, descarrega
-    const file = tracks.find(t => t.id === track).file; // Encontra o arquivo da música atual
-    const { sound: s } = await Audio.Sound.createAsync(file); // Cria o objeto de som com o arquivo
+    if (sound) await sound.unloadAsync(); // descarrega música anterior
 
-    // Atualiza o estado conforme o áudio toca (posição, duração, estado de reprodução)
+    const file = tracks.find(t => t.id === track).file;
+    const { sound: s } = await Audio.Sound.createAsync(file);
+
+    // Atualiza barra de progresso + play/pause em tempo real
     s.setOnPlaybackStatusUpdate(st => {
-      if (!st.isLoaded) return; // Ignora se o som não estiver carregado
-      setPos(st.positionMillis); // Atualiza a posição atual
-      setDur(st.durationMillis || 1); // Atualiza a duração (ou 1 se indefinido)
-      setPlaying(st.isPlaying); // Atualiza se está tocando ou não
+      if (!st.isLoaded) return;
+      setPos(st.positionMillis);
+      setDur(st.durationMillis || 1);
+      setPlaying(st.isPlaying);
     });
 
-    setSound(s); // Armazena o som criado no estado
+    setSound(s);
   }
 
-  // Função para alternar entre play e pause
+  // Alterna play/pause
   const toggle = () => sound && (playing ? sound.pauseAsync() : sound.playAsync());
 
-  // Função para mover a música para uma posição específica (0 a 1 multiplicado pela duração)
+  // Move o slider
   const seek = v => sound?.setPositionAsync(v * dur);
 
-  // Função para avançar ou retroceder X milissegundos na música
+  // Avança ou volta X milissegundos
   const jump = async ms => {
     if (!sound) return;
-    let newPos = pos + ms; // Nova posição
-    newPos = Math.max(0, Math.min(newPos, dur)); // Garante que fique entre 0 e duração total
-    await sound.setPositionAsync(newPos); // Define nova posição no áudio
+    let newPos = pos + ms;
+    newPos = Math.max(0, Math.min(newPos, dur)); // evita ultrapassar limites
+    await sound.setPositionAsync(newPos);
   };
 
-  // useEffect que roda sempre que a música selecionada mudar
-  // Carrega a nova música e limpa a anterior quando o componente desmonta ou troca de música
+  // -----------------------------------------------------
+  // Sempre que trocar de música, carrega a nova
+  // -----------------------------------------------------
   useEffect(() => {
     load();
-    return () => sound?.unloadAsync(); // Descarrega som antigo para liberar memória
-  }, [track]); // Executa quando o 'track' muda
+    return () => sound?.unloadAsync();  // limpa ao desmontar
+  }, [track]);
 
-  // JSX que define a interface visual do player
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Player de músicas</Text>
+    <View style={styles.playerBox}>
 
-      {/* Botões para escolher a faixa */}
+      {/* Subtítulo exclusivo do player */}
+      <Text style={styles.subtitle}>{playerSubTitle}</Text>
+
+      {/* Botões de seleção de música */}
       <View style={styles.row}>
         {tracks.map(t => (
           <TouchableOpacity
             key={t.id}
-            style={[styles.trackBtn, track === t.id && styles.selected]} // Destaca o botão da faixa selecionada
-            onPress={() => setTrack(t.id)} // Atualiza o track selecionado
+            style={[styles.trackBtn, track === t.id && styles.selected]}
+            onPress={() => setTrack(t.id)} // troca música
           >
-            <Text>{t.name}</Text> {/* Nome da faixa no botão */}
+            <Text>{t.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
-      {/* Slider para controle do progresso da música */}
+      {/* Barra de progresso */}
       <Slider
         style={{ width: "90%" }}
-        minimumValue={0} // Valor mínimo do slider
-        maximumValue={1} // Valor máximo do slider (1 = 100% do áudio)
-        value={pos / dur} // Valor atual do slider (posição relativa)
-        minimumTrackTintColor="#1DB954" // Cor da parte preenchida
-        maximumTrackTintColor="#aaa" // Cor da parte não preenchida
-        thumbTintColor="#1DB954" // Cor do "polegar" do slider
-        onSlidingComplete={seek} // Evento disparado quando o usuário solta o slider (busca na posição)
+        minimumValue={0}
+        maximumValue={1}
+        value={pos / dur}
+        onSlidingComplete={seek}
+        minimumTrackTintColor="#1DB954"
+        maximumTrackTintColor="#aaa"
+        thumbTintColor="#1DB954"
       />
 
-      {/* Exibição do tempo atual e tempo total da música */}
+      {/* Tempo atual e total */}
       <View style={styles.timeRow}>
-        <Text>{fmt(pos)}</Text> {/* Tempo atual formatado */}
-        <Text>{fmt(dur)}</Text> {/* Duração total formatada */}
+        <Text>{fmt(pos)}</Text>
+        <Text>{fmt(dur)}</Text>
       </View>
 
-      {/* Controles de voltar 10s, play/pause, avançar 10s */}
+      {/* Controles: voltar, play/pause, avançar */}
       <View style={styles.controls}>
-        <TouchableOpacity onPress={() => jump(-10000)}> {/* Voltar 10 segundos */}
+        <TouchableOpacity onPress={() => jump(-10000)}>
           <Text style={styles.btn}>⏪</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={toggle}> {/* Play ou pause */}
+        <TouchableOpacity onPress={toggle}>
           <Text style={styles.btn}>{playing ? "⏸" : "▶"}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => jump(10000)}> {/* Avançar 10 segundos */}
+        <TouchableOpacity onPress={() => jump(10000)}>
           <Text style={styles.btn}>⏩</Text>
         </TouchableOpacity>
       </View>
+    </View>
+  );
+}
+
+// TELA PRINCIPAL — exibe 3 players independentes
+export default function Player() {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      
+      {/* Título da tela */}
+      <Text style={styles.title}>Estilos em Destaque</Text>
+
+      {/* PLAYER 1 */}
+      <PlayerBlock tracks={tracksPlayer1} playerSubTitle="Clássica ao Sertanejo" />
+
+      {/* PLAYER 2 */}
+      <PlayerBlock tracks={tracksPlayer2} playerSubTitle="Top 3 Brasil" />
+
+      {/* PLAYER 3 */}
+      <PlayerBlock tracks={tracksPlayer3} playerSubTitle="Top 3 Sertanejo" />
+
     </ScrollView>
   );
 }
 
-// Estilos para os componentes visuais
+// ESTILOS
 const styles = StyleSheet.create({
-  container: { 
-    alignItems: "center", // Centraliza conteúdo horizontalmente
-    padding: 20, // Espaço interno
-    flexGrow: 1,            // para ScrollView ocupar a tela toda
-    backgroundColor: "#d3d3d3", // fundo branco da página inteira
+  container: {
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#d3d3d3",
+    flexGrow: 1,
   },
+
+  playerBox: {
+    width: "95%",
+    padding: 15,
+    marginBottom: 30,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    elevation: 3,
+  },
+
   title: { 
     fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 30 // Espaço abaixo do título
-  },
-  row: {
-    flexDirection: "row", // Itens em linha horizontal
-    marginBottom: 20, 
-    gap: 10 // Espaço entre botões
-  },
-  trackBtn: {
-    backgroundColor: "#fff",
-    padding: 10, // Espaçamento interno
-    borderRadius: 8 
-  },
-  selected: {
-    backgroundColor: "#1DB954"
-  },
-  timeRow: {
-    width: "90%",
-    flexDirection: "row", // Conteúdo em linha
-    justifyContent: "space-between", // Espaço entre os textos
-    marginTop: 5, 
     marginBottom: 20,
   },
-  controls: { 
-    flexDirection: "row", // Controles em linha
-    marginTop: 10, 
-    gap: 30 // Espaço entre os botões
+
+  subtitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+    color: "#333",
   },
-  btn: { 
-    fontSize: 35
+
+  row: {
+    flexDirection: "row",
+    marginBottom: 20,
+    gap: 10,
+  },
+
+  trackBtn: {
+    backgroundColor: "#eee",
+    padding: 10,
+    borderRadius: 8,
+  },
+
+  selected: {
+    backgroundColor: "#1DB954",
+  },
+
+  timeRow: {
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+    marginBottom: 20,
+  },
+
+  controls: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 30,
+  },
+
+  btn: {
+    fontSize: 35,
+  },
+
+  player: {
+    alignItems:"center",
+    justifyContent:"center",
   },
 });

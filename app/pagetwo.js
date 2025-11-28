@@ -28,7 +28,7 @@ export default function Page() {
 
         {/* TÍTULO */}
         <Text style={[styles.title, { fontSize: titleSize }]}>
-          Da Música Clássica ao Sertanejo Raiz
+        Da Música Clássica ao Sertanejo Raiz
         </Text>
 
         {/* SUBTÍTULO */}

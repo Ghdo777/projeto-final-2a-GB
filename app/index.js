@@ -32,7 +32,7 @@ export default function Page() {
           resizeMode="contain"
         />
 
-        <Text style={styles.descricao}>
+        <Text style={styles.introBox}>
           Aqui você pode explorar a música do clássico ao sertanejo raiz.
           Descubra os estilos musicais, conheça artistas importantes, confira
           curiosidades sobre a história da música. Tudo isso de forma simples,
@@ -82,4 +82,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     alignSelf: "center",
   },
+  introBox: {
+    backgroundColor: "#999999",
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 25,
+    width: "100%",},
 });

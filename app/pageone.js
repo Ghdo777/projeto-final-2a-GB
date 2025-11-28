@@ -26,7 +26,7 @@ export default function Page() {
       <View style={styles.main}>
         
         {/* MÚSICA CLÁSSICA */}
-        <Text style={[styles.p1, { fontSize: titleSize }]}>Música Clássica</Text>
+        <Text style={[styles.p1, { fontSize: titleSize }]}>🎻Música Clássica</Text>
 
         <Image 
           source={classica} 
@@ -43,7 +43,7 @@ export default function Page() {
         </Text>
 
         {/* SERTANEJO RAIZ */}
-        <Text style={[styles.p2, { fontSize: titleSize }]}>Sertanejo Raiz</Text>
+        <Text style={[styles.p2, { fontSize: titleSize }]}>🤠Sertanejo Raiz</Text>
 
         <Image 
           source={sertanejo} 
