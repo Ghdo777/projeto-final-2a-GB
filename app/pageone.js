@@ -34,7 +34,7 @@ export default function Page() {
           resizeMode="contain" 
         />
 
-        <Text style={[styles.text, { fontSize: textSize }]}>
+        <Text style={[styles.introBox, { fontSize: textSize }]}>
           A música clássica surgiu na Europa entre os séculos XVII e XIX e é considerada uma das formas mais sofisticadas de 
           expressão musical já criadas. Ela é caracterizada por composições extensas, grande preocupação com harmonia, melodias 
           complexas e o uso de instrumentos como violino, piano, violoncelo e toda uma orquestra completa. Entre os compositores
@@ -51,7 +51,7 @@ export default function Page() {
           resizeMode="contain"
         />
 
-        <Text style={[styles.text, { fontSize: textSize }]}>
+        <Text style={[styles.introBox, { fontSize: textSize }]}>
           O Sertanejo Raiz – ou Música Caipira – nasceu no interior do Brasil e representa a cultura popular de estados como
           São Paulo, Minas Gerais, Goiás e Paraná. Sua origem está ligada ao trabalho de Cornélio Pires, na década de 1920.
           Diferente da música clássica, o Sertanejo Raiz tem como base a Viola Caipira e as Modas de Viola, que tratam da vida
@@ -88,12 +88,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 12,
   },
-  text: {
-    textAlign: "center",
-    maxWidth: 800,   // para web ficar elegante
-    marginBottom: 25,
-  },
   image: {
     marginBottom: 15,
   },
+  introBox: {
+    backgroundColor: "#999999",
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 25,
+    width: "100%",},
 });

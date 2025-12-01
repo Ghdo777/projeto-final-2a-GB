@@ -1,6 +1,4 @@
 import { StyleSheet, Text, View, Image, ScrollView, useWindowDimensions } from "react-native";
-import classica from "../assets/classica.png";
-import sertanejo from "../assets/sertanejo.png";
 import claserta from "../assets/classica-sertanejo.png";
 
 export default function Page() {
@@ -44,38 +42,28 @@ export default function Page() {
         />
 
         {/* TEXTOS */}
-        <Text style={[styles.text, { fontSize: textSize }]}>
+        <Text style={[styles.introBox, { fontSize: textSize }]}>
           Sabe quando a gente ouve uma daquelas músicas clássicas, com uma
           orquestra inteira, e sente um arrepio na espinha? É uma emoção tão
           grande, tão poderosa, que parece que o som preenche cada cantinho
           da gente.
-        </Text>
-
-        <Text style={[styles.text, { fontSize: textSize }]}>
+        
           A gente olha para a Música Clássica e pensa: "Que coisa grandiosa,
           que arte sofisticada!" E é mesmo. Ali tem uma disciplina que vem de
           muito longe, de gente que dedicou a vida inteira a entender como os
           sons se encaixam pra tocar o coração.
-        </Text>
 
-        <Text style={[styles.text, { fontSize: textSize }]}>
           Mas aí, a gente dá um salto e pisa no chão batido do nosso interior,
           onde o sol se deita avermelhado e a vida segue o ritmo da natureza.
-        </Text>
 
-        <Text style={[styles.text, { fontSize: textSize }]}>
           À primeira vista, parece que não tem nada a ver, né? Um é do salão
           elegante, o outro da roça. Mas ambos nascem do mesmo lugar: a
           necessidade humana de expressar o que sente mais fundo.
-        </Text>
 
-        <Text style={[styles.text, { fontSize: textSize }]}>
           Nos dois mundos, existe uma sabedoria profunda: na clássica, a dos
           mestres; no sertanejo, a do povo que aprendeu pela vivência a
           transformar a vida em música.
-        </Text>
-
-        <Text style={[styles.text, { fontSize: textSize }]}>
+        
           No fundo, as duas nos lembram que a música — seja ela tocada em um
           salão ou numa varanda simples — é a forma mais pura de tocar o
           coração.
@@ -112,10 +100,10 @@ const styles = StyleSheet.create({
   claserta: {
     marginBottom: 20,
   },
-  text: {
-    maxWidth: 800,
-    textAlign: "center",
-    marginBottom: 18,
-    paddingHorizontal: 12,
-  },
+  introBox: {
+    backgroundColor: "#999999",
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 25,
+    width: "100%",},
 });
