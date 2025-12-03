@@ -35,11 +35,14 @@ export default function Page() {
         />
 
         <Text style={[styles.introBox, { fontSize: textSize }]}>
-          A música clássica surgiu na Europa entre os séculos XVII e XIX e é considerada uma das formas mais sofisticadas de 
-          expressão musical já criadas. Ela é caracterizada por composições extensas, grande preocupação com harmonia, melodias 
-          complexas e o uso de instrumentos como violino, piano, violoncelo e toda uma orquestra completa. Entre os compositores
-          mais famosos estão Ludwig van Beethoven, Wolfgang Amadeus Mozart e Johann Sebastian Bach, que influenciaram profundamente
-          a música ocidental. Suas obras são marcadas por emoção, intensidade e perfeição técnica.
+        A música clássica surgiu na Europa entre os séculos XVII e XIX e é 
+        considerada uma das formas mais sofisticadas de expressão musical já criadas.
+         Ela é caracterizada por composições extensas, grande preocupação com harmonia,
+          melodias complexas e o uso de instrumentos como violino, piano, violoncelo e 
+          toda uma orquestra completa. Entre os compositores mais famosos estão Ludwig
+           van Beethoven, Wolfgang Amadeus Mozart e Johann Sebastian Bach, que influenciaram 
+           profundamente a música ocidental. Suas obras são marcadas por emoção, intensidade
+            e perfeição técnica.
         </Text>
 
         {/* SERTANEJO RAIZ */}

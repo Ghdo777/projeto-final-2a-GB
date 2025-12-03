@@ -23,7 +23,7 @@ export default function Page() {
         <Text style={styles.title}>Bem-vindo ao Mundo da Música</Text>
 
         <Text style={styles.subtitle}>
-          Pequena descrição do que o app oferece:
+        Aqui está uma pequena descrição do que o app oferece:
         </Text>
 
         <Image
@@ -33,10 +33,9 @@ export default function Page() {
         />
 
         <Text style={styles.introBox}>
-          Aqui você pode explorar a música do clássico ao sertanejo raiz.
-          Descubra os estilos musicais, conheça artistas importantes, confira
-          curiosidades sobre a história da música. Tudo isso de forma simples,
-          visual e interativa, para você aprender mais sobre as músicas.
+        Aqui você pode explorar a música, do clássico ao sertanejo raiz.
+        Descubra estilos musicais, conheça artistas importantes e confira curiosidades sobre a história da música.
+        Tudo isso de forma simples, visual e interativa, para você aprender ainda mais sobre música.
         </Text>
       </View>
 

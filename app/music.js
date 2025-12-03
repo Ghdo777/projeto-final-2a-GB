@@ -1,11 +1,14 @@
+//useState:controla estados (tempo,musica,progresso)
+//useEffect:executa açao (trocar musica)
+//expo-nav:biblioteca de audio
+//slider:barra de progresso
+
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Audio } from "expo-av";
 import Slider from "@react-native-community/slider";
 
-// -----------------------------------------------------
 // LISTAS DE MÚSICAS – cada player recebe sua própria lista
-// -----------------------------------------------------
 const tracksPlayer1 = [
   { id: 1, name: "Clássica", file: require("../assets/musicas/musicclassica.mp3") },
   { id: 2, name: "Sertanejo", file: require("../assets/musicas/musicsertanejo.mp3") },
@@ -21,13 +24,13 @@ const tracksPlayer2 = [
 const tracksPlayer3 = [
   { id: 1, name: "Tubarões", file: require("../assets/musicas/Tubarões.mp3") },
   { id: 2, name: "Cair Água", file: require("../assets/musicas/Vai Cair Água.mp3") },
-  { id: 3, name: "maloqueiro", file: require("../assets/musicas/Ama um Maloqueiro.mp3") },
+  { id: 3, name: "Maloqueiro", file: require("../assets/musicas/Ama um Maloqueiro.mp3") },
 ];
 
 
-// -----------------------------------------------------
+
 // COMPONENTE PLAYER — ele é reutilizável para cada bloco
-// -----------------------------------------------------
+
 function PlayerBlock({ tracks, playerSubTitle }) {
 
   // Estados principais do player
@@ -44,9 +47,9 @@ function PlayerBlock({ tracks, playerSubTitle }) {
     return `${m}:${s}`;
   };
 
-  // -----------------------------------------------------
+  
   // Função responsável por carregar a música selecionada
-  // -----------------------------------------------------
+  
   async function load() {
     if (sound) await sound.unloadAsync(); // descarrega música anterior
 
@@ -78,9 +81,9 @@ function PlayerBlock({ tracks, playerSubTitle }) {
     await sound.setPositionAsync(newPos);
   };
 
-  // -----------------------------------------------------
+  
   // Sempre que trocar de música, carrega a nova
-  // -----------------------------------------------------
+  
   useEffect(() => {
     load();
     return () => sound?.unloadAsync();  // limpa ao desmontar
@@ -150,7 +153,7 @@ export default function Player() {
       <Text style={styles.title}>Estilos em Destaque</Text>
 
       {/* PLAYER 1 */}
-      <PlayerBlock tracks={tracksPlayer1} playerSubTitle="Clássica ao Sertanejo" />
+      <PlayerBlock tracks={tracksPlayer1} playerSubTitle="Do Clássico ao Sertanejo" />
 
       {/* PLAYER 2 */}
       <PlayerBlock tracks={tracksPlayer2} playerSubTitle="Top 3 Brasil" />

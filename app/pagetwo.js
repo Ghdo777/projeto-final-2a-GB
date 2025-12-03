@@ -8,7 +8,7 @@ export default function Page() {
   const isMobile = width < 600;
   const isTablet = width >= 600 && width < 1000;
 
-  // Fontes responsivas
+  // Fontes responsivas 
   const titleSize = isMobile ? 28 : isTablet ? 36 : 42;
   const subtitleSize = isMobile ? 20 : isTablet ? 28 : 32;
   const textSize = isMobile ? 15 : isTablet ? 17 : 19;

@@ -24,7 +24,7 @@ export default function Layout() {
              />
              <Tabs.Screen
              name="music" 
-             options={{ title: "Musicas", headerShown: false,
+             options={{ title: "Músicas", headerShown: false,
                 tabBarIcon: ({color}) => <FontAwesome name="music" size={24} color={color} /> 
             }}
             />
